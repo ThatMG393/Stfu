@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "stfu",
+  "version": "${version}",
+  "name": "Stfu",
+  "description": "A mod that fixes some minor annoyances!",
+  "authors": [
+    "itsfelix5"
+  ],
+  "contact": {
+    "website": "https://modrinth.com/project/shuttfup",
+    "repo": "https://github.com/ItsFelix5/stfu"
+  },
+  "license": "MIT",
+  "icon": "assets/stfu/icon.png",
+  "environment": "client",
+  "mixins": [
+    "stfu.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "${minecraft_version}"
+  }
+}
