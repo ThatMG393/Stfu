@@ -3,14 +3,16 @@
   "minVersion": "0.8",
   "package": "stfu",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
     "BetterDefaultSettings",
+    "ShowAllRecipes",
+    "ShutCommandLimit",
     "ShutTelemetry",
     "ShutToasts",
     "ShutWorldAdvice",
-    "ShowAllRecipes"
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  }
+    "TextFieldWidgetFix"
+  ]
 }

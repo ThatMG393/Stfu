@@ -12,3 +12,4 @@
 * Enable the operator item tab by default
 * Remove the tutorial
 * Allows you to see all recipes without unlocking them
+* Disables the chat command length limit
