@@ -1,0 +1,8 @@
+{
+  "options.maxChatHistory": "Max chat history",
+  "options.announceAdvancements": "Announce advancements",
+  "options.adminChat": "Admin chat",
+  "options.adminChat.enabled": "Enabled",
+  "options.adminChat.only_players": "Only players",
+  "options.adminChat.disabled": "Disabled"
+}

@@ -1,4 +1,4 @@
-package stfu;
+package stfu.mixin;
 
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import org.spongepowered.asm.mixin.Mixin;

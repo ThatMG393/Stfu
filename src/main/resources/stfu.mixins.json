@@ -1,15 +1,19 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "stfu",
+  "package": "stfu.mixin",
   "compatibilityLevel": "JAVA_21",
   "injectors": {
     "defaultRequire": 1
   },
   "client": [
     "BetterDefaultSettings",
+    "ChatOptions",
     "ShowAllRecipes",
+    "ShutChat",
     "ShutCommandLimit",
+    "ShutInsecureIndicators",
+    "ShutInsecureIndicators$Visible",
     "ShutTelemetry",
     "ShutToasts",
     "ShutWorldAdvice",

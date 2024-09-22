@@ -1,4 +1,4 @@
-package stfu;
+package stfu.mixin;
 
 import net.minecraft.client.session.telemetry.TelemetryManager;
 import net.minecraft.client.session.telemetry.TelemetrySender;

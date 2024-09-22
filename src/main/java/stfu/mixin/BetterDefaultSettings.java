@@ -1,4 +1,4 @@
-package stfu;
+package stfu.mixin;
 
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.option.SimpleOption;

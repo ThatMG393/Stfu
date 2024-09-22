@@ -1,4 +1,4 @@
-package stfu;
+package stfu.mixin;
 
 import com.mojang.serialization.Lifecycle;
 import net.minecraft.client.MinecraftClient;

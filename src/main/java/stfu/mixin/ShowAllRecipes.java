@@ -1,4 +1,4 @@
-package stfu;
+package stfu.mixin;
 
 import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.recipe.book.RecipeBook;

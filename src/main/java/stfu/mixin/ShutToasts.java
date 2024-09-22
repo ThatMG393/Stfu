@@ -1,4 +1,4 @@
-package stfu;
+package stfu.mixin;
 
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.recipe.Recipe;
