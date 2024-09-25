@@ -21,13 +21,14 @@ public class ShutChat {
 
     @Inject(method = "addMessage(Lnet/minecraft/text/Text;)V", at = @At("HEAD"), cancellable = true)
     private void filter(Text message, CallbackInfo ci) {
-        if(!(message instanceof MutableText mutable && mutable.getContent() instanceof TranslatableTextContent translatable)) return;
+        if (!(message instanceof MutableText mutable && mutable.getContent() instanceof TranslatableTextContent translatable)) return;
 
-        if(translatable.getKey().startsWith("chat.type.advancement")) {
-            if(!Options.announceAdvancements.getValue()) ci.cancel();
-        } else if(translatable.getKey().equals("chat.type.admin")) {
+        if (translatable.getKey().startsWith("chat.type.advancement")) {
+            if (!Options.announceAdvancements.getValue()) ci.cancel();
+        } else if (translatable.getKey().equals("chat.type.admin")) {
             Options.AdminChat adminChat = Options.adminChat.getValue();
-            if(adminChat == Options.AdminChat.DISABLED || (adminChat == Options.AdminChat.ONLY_PLAYERS && translatable.getArgs()[0].equals("@"))) ci.cancel();
+            if (adminChat == Options.AdminChat.DISABLED || (adminChat == Options.AdminChat.ONLY_PLAYERS && translatable.getArgs()[0].equals("@")))
+                ci.cancel();
         }
     }
 }

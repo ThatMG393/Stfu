@@ -9,6 +9,7 @@
   "client": [
     "BetterDefaultSettings",
     "ChatOptions",
+    "OptionSaver",
     "ShowAllRecipes",
     "ShutChat",
     "ShutCommandLimit",

@@ -25,12 +25,12 @@ public class ShutCommandLimit {
 
     @Inject(method = "onChatFieldUpdate", at = @At(value = "HEAD"))
     private void onChatFieldUpdate(String chatText, CallbackInfo ci) {
-        if(chatText.startsWith("/") || chatText.isEmpty()) {
-            if(!isCommand) {
+        if (chatText.startsWith("/") || chatText.isEmpty()) {
+            if (!isCommand) {
                 isCommand = true;
                 chatField.setMaxLength(Integer.MAX_VALUE);
             }
-        } else if(isCommand) {
+        } else if (isCommand) {
             isCommand = false;
             chatField.setMaxLength(256);
         }
@@ -38,7 +38,7 @@ public class ShutCommandLimit {
 
     @Inject(method = "normalize", at = @At(value = "HEAD"), cancellable = true)
     private void normalize(String chatText, CallbackInfoReturnable<String> cir) {
-        if(chatText.startsWith("/"))
+        if (chatText.startsWith("/"))
             cir.setReturnValue(StringUtils.normalizeSpace(chatText.trim()));
     }
 }

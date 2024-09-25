@@ -14,6 +14,7 @@
   "license": "MIT",
   "icon": "assets/stfu/icon.png",
   "environment": "client",
+  "accessWidener": "stfu.accesswidener",
   "mixins": [
     "stfu.mixins.json"
   ],
