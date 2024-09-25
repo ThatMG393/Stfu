@@ -16,3 +16,15 @@
 * Added options to hide advancement broadcasts and command block output
 * Added an option to increase the maximum amount of chat messages
 * Removed the unsigned message indicators
+
+### Faq
+#### I have a suggestion for this mod!
+If you have any suggestions, feel free to [tell me](https://github.com/ItsFelix5/Stfu/issues/new?&labels=Feature&template=feature_request.md&title=%5BSUGGESTION%5D+)!
+#### Is this mod compatible with X?
+Probably if there is a problematic conflict you can [open an issue](https://github.com/ItsFelix5/Stfu/issues/new?labels=Incompatibility&template=bug_report.md&title=%5BINCOMPATIBILITY%5D+).
+#### Can I use this in my modpack?
+Yes, of course as long as it stays on modrinth!
+#### Can I redistribute this mod?
+No, you can't redistribute this mod. You can only link to this page.
+#### Why is this mod called "Stfu"?
+This is because the mod was originally created to remove the annoying new world advice and the narrator jumpscares.
