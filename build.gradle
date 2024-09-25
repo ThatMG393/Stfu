@@ -52,7 +52,6 @@ modrinth {
     gameVersions = ["1.20.5", "1.20.6", "1.21", "1.21.1"]
     loaders = ["fabric", "quilt"]
     syncBodyFrom = rootProject.file("README.md").text
-    debugMode = true
 }
 
 tasks.modrinth.dependsOn(tasks.modrinthSyncBody)
