@@ -1,6 +1,5 @@
 # Stfu
-### The mod that makes mojang shut up!
-(By fixing minor annoyances!)
+### A mod to fix some minor annoyances!
 
 #### Current changes:
 * Removed custom world "advice"
@@ -16,12 +15,14 @@
 * Added options to hide advancement broadcasts and command block output
 * Added an option to increase the maximum amount of chat messages
 * Removed the unsigned message indicators
+* Fixed tooltips running off the screen (only horizonally for now)
 
 ### Faq
 #### I have a suggestion for this mod!
 If you have any suggestions, feel free to [tell me](https://github.com/ItsFelix5/Stfu/issues/new?&labels=Feature&template=feature_request.md&title=%5BSUGGESTION%5D+)!
 #### Is this mod compatible with X?
-Probably if there is a problematic conflict you can [open an issue](https://github.com/ItsFelix5/Stfu/issues/new?labels=Incompatibility&template=bug_report.md&title=%5BINCOMPATIBILITY%5D+).
+Probably, I am trying to make this mod as compatible as I can. If there is a problematic conflict you can 
+[open an issue](https://github.com/ItsFelix5/Stfu/issues/new?labels=Incompatibility&template=bug_report.md&title=%5BINCOMPATIBILITY%5D+).
 #### Can I use this in my modpack?
 Yes, of course as long as it stays on modrinth!
 #### Can I redistribute this mod?

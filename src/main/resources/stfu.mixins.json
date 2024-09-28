@@ -18,6 +18,7 @@
     "ShutTelemetry",
     "ShutToasts",
     "ShutWorldAdvice",
-    "TextFieldWidgetFix"
+    "TextFieldWidgetFix",
+    "TooltipFix"
   ]
 }
