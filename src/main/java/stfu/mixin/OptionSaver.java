@@ -14,5 +14,6 @@ public class OptionSaver {
         visitor.accept("maxChatHistory", Options.maxChatHistory);
         visitor.accept("announceAdvancements", Options.announceAdvancements);
         visitor.accept("adminChat", Options.adminChat);
+        visitor.accept("compactChat", Options.compactChat);
     }
 }

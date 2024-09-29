@@ -4,5 +4,9 @@
   "options.adminChat": "Admin chat",
   "options.adminChat.enabled": "Enabled",
   "options.adminChat.only_players": "Only players",
-  "options.adminChat.disabled": "Disabled"
+  "options.adminChat.disabled": "Disabled",
+  "options.compactChat": "Compact chat",
+  "options.compactChat.all": "Always",
+  "options.compactChat.only_consecutive": "Only consecutive",
+  "options.compactChat.never": "Never"
 }

@@ -35,4 +35,20 @@ public class Options {
         ONLY_PLAYERS,
         DISABLED
     }
+
+    public static final SimpleOption<CompactChat> compactChat = new SimpleOption<>(
+            "options.compactChat",
+            SimpleOption.emptyTooltip(),
+            (optionText, value) -> GameOptions.getGenericValueText(optionText, Text.translatable("options.compactChat." + value.name().toLowerCase())),
+            new SimpleOption.PotentialValuesBasedCallbacks<>(List.of(CompactChat.values()), Codec.INT.xmap(i -> CompactChat.values()[i],
+                    CompactChat::ordinal)),
+            CompactChat.ONLY_CONSECUTIVE,
+            value -> {}
+    );
+
+    public enum CompactChat {
+        ALL,
+        ONLY_CONSECUTIVE,
+        NEVER
+    }
 }

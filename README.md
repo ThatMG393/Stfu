@@ -16,6 +16,7 @@
 * Added an option to increase the maximum amount of chat messages
 * Removed the unsigned message indicators
 * Fixed tooltips running off the screen (only horizonally for now)
+* Added an option to compact repetitive chat messages
 
 ### Faq
 #### I have a suggestion for this mod!

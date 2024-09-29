@@ -19,6 +19,6 @@ public abstract class ChatOptions extends GameOptionsScreen {
 
     @Inject(method = "addOptions", at = @At("TAIL"))
     private void addMaxChatHistoryOption(CallbackInfo ci) {
-        body.addAll(Options.maxChatHistory, Options.adminChat, Options.announceAdvancements);
+        if (body != null) body.addAll(Options.maxChatHistory, Options.adminChat, Options.announceAdvancements, Options.compactChat);
     }
 }
