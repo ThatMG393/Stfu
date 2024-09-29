@@ -23,7 +23,7 @@ public class Options {
     public static final SimpleOption<AdminChat> adminChat = new SimpleOption<>(
             "options.adminChat",
             SimpleOption.emptyTooltip(),
-            (optionText, value) -> GameOptions.getGenericValueText(optionText, Text.translatable("options.adminChat." + value.name().toLowerCase())),
+            (optionText, value) -> Text.translatable("options.adminChat." + value.name().toLowerCase()),
             new SimpleOption.PotentialValuesBasedCallbacks<>(List.of(AdminChat.values()), Codec.INT.xmap(i -> AdminChat.values()[i],
                     AdminChat::ordinal)),
             AdminChat.ENABLED,
@@ -39,7 +39,7 @@ public class Options {
     public static final SimpleOption<CompactChat> compactChat = new SimpleOption<>(
             "options.compactChat",
             SimpleOption.emptyTooltip(),
-            (optionText, value) -> GameOptions.getGenericValueText(optionText, Text.translatable("options.compactChat." + value.name().toLowerCase())),
+            (optionText, value) -> Text.translatable("options.compactChat." + value.name().toLowerCase()),
             new SimpleOption.PotentialValuesBasedCallbacks<>(List.of(CompactChat.values()), Codec.INT.xmap(i -> CompactChat.values()[i],
                     CompactChat::ordinal)),
             CompactChat.ONLY_CONSECUTIVE,

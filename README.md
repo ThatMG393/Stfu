@@ -15,7 +15,7 @@
 * Added options to hide advancement broadcasts and command block output
 * Added an option to increase the maximum amount of chat messages
 * Removed the unsigned message indicators
-* Fixed tooltips running off the screen (only horizonally for now)
+* Fixed tooltips running off the screen
 * Added an option to compact repetitive chat messages
 
 ### Faq
@@ -25,8 +25,8 @@ If you have any suggestions, feel free to [tell me](https://github.com/ItsFelix5
 Probably, I am trying to make this mod as compatible as I can. If there is a problematic conflict you can 
 [open an issue](https://github.com/ItsFelix5/Stfu/issues/new?labels=Incompatibility&template=bug_report.md&title=%5BINCOMPATIBILITY%5D+).
 #### Can I use this in my modpack?
-Yes, of course as long as it stays on modrinth!
+Yes, of course as long as it stays on modrinth or curseforge!
 #### Can I redistribute this mod?
-No, you can't redistribute this mod. You can only link to this page.
+No, you can't redistribute this mod without my permission. You can only link to this page.
 #### Why is this mod called "Stfu"?
 This is because the mod was originally created to remove the annoying new world advice and the narrator jumpscares.
