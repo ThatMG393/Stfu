@@ -6,6 +6,7 @@ import net.minecraft.client.option.SimpleOption;
 import net.minecraft.text.Text;
 
 import java.util.List;
+import java.util.Map;
 
 public class Options {
     public static final SimpleOption<Integer> maxChatHistory = new SimpleOption<>(
@@ -51,4 +52,11 @@ public class Options {
         ONLY_CONSECUTIVE,
         NEVER
     }
+
+    public static final Map<String, SimpleOption<?>> OPTIONS = Map.of(
+            "maxChatHistory", maxChatHistory,
+            "announceAdvancements", announceAdvancements,
+            "adminChat", adminChat,
+            "compactChat", compactChat
+    );
 }
