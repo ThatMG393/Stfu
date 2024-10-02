@@ -30,7 +30,7 @@ public class OptionSaver {
     @Shadow @Final private static Splitter COLON_SPLITTER;
     @Shadow @Final static Logger LOGGER;
     @Shadow @Final static Gson GSON;
-    @Unique private final File optionsFile = new File(MinecraftClient.getInstance().runDirectory, ".config/stfu.txt");
+    @Unique private final File optionsFile = new File(MinecraftClient.getInstance().runDirectory, "config/stfu.txt");
 
     @Inject(method = "load", at = @At("TAIL"))
     private void loadOptions(CallbackInfo ci) {
