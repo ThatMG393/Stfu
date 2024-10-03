@@ -1,5 +1,6 @@
 package stfu.mixin;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.tooltip.OrderedTextTooltipComponent;
@@ -13,6 +14,7 @@ import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -22,6 +24,9 @@ import java.util.List;
 
 @Mixin(DrawContext.class)
 public abstract class TooltipFix {
+    @Unique
+    private static final boolean disabled = FabricLoader.getInstance().isModLoaded("legacy");// #6
+
     @Shadow
     public abstract int getScaledWindowWidth();
 
@@ -42,6 +47,7 @@ public abstract class TooltipFix {
     @Inject(method = "drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;)V",
             at = @At(value = "HEAD"), cancellable = true)
     public void drawTooltip(TextRenderer textRenderer, List<TooltipComponent> components, int x, int y, TooltipPositioner positioner, CallbackInfo ci) {
+        if(disabled) return;
         ci.cancel();
         if (components.isEmpty()) return;
         DrawContext self = (DrawContext) (Object) this;
