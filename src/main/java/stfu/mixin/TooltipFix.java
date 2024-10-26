@@ -11,6 +11,7 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -26,13 +27,15 @@ import java.util.List;
 public abstract class TooltipFix {
     @Unique
     private static final boolean disabled = FabricLoader.getInstance().isModLoaded("legacy");// #6
-
-    @Shadow
-    public abstract int getScaledWindowWidth();
-
     @Shadow
     @Final
     private MatrixStack matrices;
+    @Shadow
+    @Final
+    private VertexConsumerProvider.Immediate vertexConsumers;
+
+    @Shadow
+    public abstract int getScaledWindowWidth();
 
     @Shadow
     public abstract void draw();
@@ -40,14 +43,9 @@ public abstract class TooltipFix {
     @Shadow
     public abstract int getScaledWindowHeight();
 
-    @Shadow
-    @Final
-    private VertexConsumerProvider.Immediate vertexConsumers;
-
-    @Inject(method = "drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;)V",
-            at = @At(value = "HEAD"), cancellable = true)
-    public void drawTooltip(TextRenderer textRenderer, List<TooltipComponent> components, int x, int y, TooltipPositioner positioner, CallbackInfo ci) {
-        if(disabled) return;
+    @Inject(method = "drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;Lnet/minecraft/util/Identifier;)V", at = @At(value = "HEAD"), cancellable = true)
+    public void drawTooltip(TextRenderer textRenderer, List<TooltipComponent> components, int x, int y, TooltipPositioner positioner, Identifier texture, CallbackInfo ci) {
+        if (disabled) return;
         ci.cancel();
         if (components.isEmpty()) return;
         DrawContext self = (DrawContext) (Object) this;
@@ -120,22 +118,22 @@ public abstract class TooltipFix {
             int k = component.getWidth(textRenderer);
             if (k > i) i = k;
 
-            j += component.getHeight();
+            j += component.getHeight(textRenderer);
         }
 
         int renderY = y - 12;
         if (renderY + j + 3 > getScaledWindowHeight()) renderY = getScaledWindowHeight() - j - 3;
         this.matrices.push();
         this.draw();
-        TooltipBackgroundRenderer.render(self, renderX, renderY, i, j, 400);
+        TooltipBackgroundRenderer.render(self, renderX, renderY, i, j, 400, texture);
         this.draw();
         this.matrices.translate(0.0F, 0.0F, 400.0F);
 
         for (int r = 0; r < components.size(); ++r) {
             TooltipComponent tooltipComponent2 = components.get(r);
             tooltipComponent2.drawText(textRenderer, renderX, renderY, this.matrices.peek().getPositionMatrix(), this.vertexConsumers);
-            tooltipComponent2.drawItems(textRenderer, renderX, renderY, self);
-            renderY += tooltipComponent2.getHeight() + (r == 0 ? 2 : 0);
+            tooltipComponent2.drawItems(textRenderer, renderX, renderY, i, j, self);
+            renderY += tooltipComponent2.getHeight(textRenderer) + (r == 0 ? 2 : 0);
         }
 
         this.matrices.pop();

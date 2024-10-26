@@ -27,7 +27,6 @@ abstract class BetterDefaultSettings {
         GameOptions t = (GameOptions) (Object) this;
         t.onboardAccessibility = false;
         t.skipMultiplayerWarning = true;
-        t.hideBundleTutorial = true;
         t.tutorialStep = TutorialStep.NONE;
         t.joinedFirstServer = true;
         operatorItemsTab.setValue(true);

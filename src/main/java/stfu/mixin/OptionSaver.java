@@ -27,10 +27,32 @@ import java.util.Iterator;
 
 @Mixin(GameOptions.class)
 public class OptionSaver {
-    @Shadow @Final private static Splitter COLON_SPLITTER;
-    @Shadow @Final static Logger LOGGER;
-    @Shadow @Final static Gson GSON;
-    @Unique private final File optionsFile = new File(MinecraftClient.getInstance().runDirectory, "config/stfu.txt");
+    @Shadow
+    @Final
+    static Logger LOGGER;
+    @Shadow
+    @Final
+    static Gson GSON;
+    @Shadow
+    @Final
+    private static Splitter COLON_SPLITTER;
+    @Unique
+    private final File optionsFile = new File(MinecraftClient.getInstance().runDirectory, "config/stfu.txt");
+
+    @Unique
+    private static <T> void load(SimpleOption<T> option, String value) {
+        DataResult<T> dataResult = option.getCodec().parse(JsonOps.INSTANCE, JsonParser.parseReader(new JsonReader(new StringReader(value.isEmpty() ? "\"\"" : value))));
+        dataResult.error().ifPresent(error -> LOGGER.error("Error parsing option value {} for option {}: {}", value, option, error.message()));
+        dataResult.ifSuccess(option::setValue);
+    }
+
+    @Unique
+    private static <T> void write(SimpleOption<T> option, String key, PrintWriter printWriter) {
+        option.getCodec()
+                .encodeStart(JsonOps.INSTANCE, option.getValue())
+                .ifError(error -> LOGGER.error("Error saving option {}: {}", option, error))
+                .ifSuccess(json -> printWriter.println(key + ':' + GSON.toJson(json)));
+    }
 
     @Inject(method = "load", at = @At("TAIL"))
     private void loadOptions(CallbackInfo ci) {
@@ -54,13 +76,6 @@ public class OptionSaver {
         }
     }
 
-    @Unique
-    private static <T> void load(SimpleOption<T> option, String value) {
-        DataResult<T> dataResult = option.getCodec().parse(JsonOps.INSTANCE, JsonParser.parseReader(new JsonReader(new StringReader(value.isEmpty() ? "\"\"" : value))));
-        dataResult.error().ifPresent(error -> LOGGER.error("Error parsing option value {} for option {}: {}", value, option, error.message()));
-        dataResult.ifSuccess(option::setValue);
-    }
-
     @Inject(method = "write", at = @At("TAIL"))
     private void saveOptions(CallbackInfo ci) {
         try {
@@ -72,13 +87,5 @@ public class OptionSaver {
         } catch (Exception var6) {
             LOGGER.error("Failed to save options", var6);
         }
-    }
-
-    @Unique
-    private static <T> void write(SimpleOption<T> option, String key, PrintWriter printWriter) {
-        option.getCodec()
-                .encodeStart(JsonOps.INSTANCE, option.getValue())
-                .ifError(error -> LOGGER.error("Error saving option {}: {}", option, error))
-                .ifSuccess(json -> printWriter.println(key + ':' + GSON.toJson(json)));
     }
 }

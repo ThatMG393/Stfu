@@ -58,7 +58,6 @@ modrinth {
     token = System.getenv("MODRINTH_TOKEN")
     projectId = "Rg9WdvvR"
     uploadFile = remapJar
-    gameVersions = ["1.20.5", "1.20.6", "1.21", "1.21.1"]
     loaders = ["fabric", "quilt"]
     syncBodyFrom = rootProject.file("README.md").text
 }

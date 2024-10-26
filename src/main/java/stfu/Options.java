@@ -30,13 +30,6 @@ public class Options {
             AdminChat.ENABLED,
             value -> {}
     );
-
-    public enum AdminChat {
-        ENABLED,
-        ONLY_PLAYERS,
-        DISABLED
-    }
-
     public static final SimpleOption<CompactChat> compactChat = new SimpleOption<>(
             "options.compactChat",
             SimpleOption.emptyTooltip(),
@@ -46,17 +39,22 @@ public class Options {
             CompactChat.ONLY_CONSECUTIVE,
             value -> {}
     );
-
-    public enum CompactChat {
-        ALL,
-        ONLY_CONSECUTIVE,
-        NEVER
-    }
-
     public static final Map<String, SimpleOption<?>> OPTIONS = Map.of(
             "maxChatHistory", maxChatHistory,
             "announceAdvancements", announceAdvancements,
             "adminChat", adminChat,
             "compactChat", compactChat
     );
+
+    public enum AdminChat {
+        ENABLED,
+        ONLY_PLAYERS,
+        DISABLED
+    }
+
+    public enum CompactChat {
+        ALL,
+        ONLY_CONSECUTIVE,
+        NEVER
+    }
 }
