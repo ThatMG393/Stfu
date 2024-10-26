@@ -16,6 +16,7 @@
 * Removed the unsigned message indicators
 * Fixed tooltips running off the screen
 * Added an option to compact repetitive chat messages
+* Made it possible to see your health and hunger when riding something
 
 ### Faq
 #### I have a suggestion for this mod!

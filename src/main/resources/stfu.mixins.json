@@ -8,6 +8,7 @@
   },
   "client": [
     "BetterDefaultSettings",
+    "BetterHud",
     "ChatOptions",
     "OptionSaver",
     "ShutChat",
