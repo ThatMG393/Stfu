@@ -16,7 +16,8 @@ public class Options {
             new SimpleOption.ValidatingIntSliderCallbacks(10, 5000),
             Codec.intRange(10, 5000),
             100,
-            value -> {}
+            value -> {
+            }
     );
 
     public static final SimpleOption<Boolean> announceAdvancements = SimpleOption.ofBoolean("options.announceAdvancements", true);
@@ -28,7 +29,8 @@ public class Options {
             new SimpleOption.PotentialValuesBasedCallbacks<>(List.of(AdminChat.values()), Codec.INT.xmap(i -> AdminChat.values()[i],
                     AdminChat::ordinal)),
             AdminChat.ENABLED,
-            value -> {}
+            value -> {
+            }
     );
     public static final SimpleOption<CompactChat> compactChat = new SimpleOption<>(
             "options.compactChat",
@@ -37,7 +39,8 @@ public class Options {
             new SimpleOption.PotentialValuesBasedCallbacks<>(List.of(CompactChat.values()), Codec.INT.xmap(i -> CompactChat.values()[i],
                     CompactChat::ordinal)),
             CompactChat.ONLY_CONSECUTIVE,
-            value -> {}
+            value -> {
+            }
     );
     public static final Map<String, SimpleOption<?>> OPTIONS = Map.of(
             "maxChatHistory", maxChatHistory,

@@ -26,7 +26,7 @@ import java.util.List;
 @Mixin(DrawContext.class)
 public abstract class TooltipFix {
     @Unique
-    private static final boolean disabled = FabricLoader.getInstance().isModLoaded("legacy");// #6
+    private static final boolean disabled = FabricLoader.getInstance().isModLoaded("legacy") || FabricLoader.getInstance().isModLoaded("legendarytooltips");// #6 & #11
     @Shadow
     @Final
     private MatrixStack matrices;

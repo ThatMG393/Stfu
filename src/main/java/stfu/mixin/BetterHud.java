@@ -9,20 +9,28 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(InGameHud.class)
 public abstract class BetterHud {
-    @Shadow @Final private MinecraftClient client;
+    @Shadow
+    @Final
+    private MinecraftClient client;
 
-    @Shadow @Nullable protected abstract LivingEntity getRiddenEntity();
+    @Shadow
+    @Nullable
+    protected abstract LivingEntity getRiddenEntity();
 
-    @Shadow protected abstract int getHeartCount(@Nullable LivingEntity entity);
+    @Shadow
+    protected abstract int getHeartCount(@Nullable LivingEntity entity);
 
     @ModifyVariable(method = "renderMountHealth", at = @At(value = "STORE"), ordinal = 2)
     private int higherMountHealth(int y) {
-        return client.interactionManager.hasStatusBars()? y-10:y;
+        return client.interactionManager.hasStatusBars() ? y - 10 : y;
     }
 
     @Redirect(method = "renderStatusBars", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;getHeartCount(Lnet/minecraft/entity/LivingEntity;)I"))

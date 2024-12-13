@@ -5,10 +5,10 @@ plugins {
 }
 
 version = project.mod_version
-group = project.maven_group
+group = "io.github.itsfelix5"
 
 base {
-    archivesName = project.archives_base_name
+    archivesName = "Stfu"
 }
 
 dependencies {
@@ -41,14 +41,14 @@ java {
 
 jar {
     from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}"}
+        rename { "${it}_Stfu" }
     }
 }
 
 publishing {
     publications {
         create("mavenJava", MavenPublication) {
-            artifactId = project.archives_base_name
+            artifactId = "Stfu"
             from components.java
         }
     }
