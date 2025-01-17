@@ -17,6 +17,7 @@
 * Fixed tooltips running off the screen
 * Added an option to compact repetitive chat messages
 * Made it possible to see your health and hunger when riding something
+* Made it possible to bind a button to multiple keybinds
 
 ### Faq
 #### I have a suggestion for this mod!
