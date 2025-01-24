@@ -22,5 +22,6 @@
   "stfu.options.disableFade.widget": "Disable Loading Widget Fade",
   "stfu.options.disableFade.widget.description": "Disable the 2 seconds all buttons are invisible on the title screen after loading.",
   "stfu.options.disableFade": "Disable Loading Fade Animation",
-  "stfu.options.disableFade.description": "Disable the 2 second fade animation when the game or resources (re)load."
+  "stfu.options.disableFade.description": "Disable the 2 second fade animation when the game or resources (re)load.",
+  "options.narrator_hotkey": "Toggle Narrator (+Ctrl)"
 }
