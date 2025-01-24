@@ -5,6 +5,10 @@
   "stfu.options.maxChatHistory.description": "The maximum number of messages to keep in chat history.",
   "stfu.options.announceAdvancements": "Announce Advancements",
   "stfu.options.announceAdvancements.description": "If minecraft shows advancements achieved in chat.",
+  "stfu.options.advancementToasts": "Advancements Toasts",
+  "stfu.options.advancementToasts.description": "If minecraft shows advancements achieved as a toast.",
+  "stfu.options.recipeToasts": "Recipe Toasts",
+  "stfu.options.recipeToasts.description": "If minecraft shows a toast when you unlock new recipes.",
   "stfu.options.adminChat": "Admin Chat",
   "stfu.options.adminChat.description": "Whether you receive a message when an admin or command block runs a command.",
   "stfu.options.adminChat.enabled": "Enabled",
@@ -14,5 +18,7 @@
   "stfu.options.compactChat.description": "When you receive multiple equal chat messages, compact them into one.",
   "stfu.options.compactChat.all": "Always",
   "stfu.options.compactChat.only_consecutive": "Only Consecutive",
-  "stfu.options.compactChat.never": "Never"
+  "stfu.options.compactChat.never": "Never",
+  "stfu.options.disableFade": "Disable Loading Fade Animation",
+  "stfu.options.disableFade.description": "Disable the 2 second fade animation when the game or resources (re)load."
 }

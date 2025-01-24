@@ -25,15 +25,18 @@ public class Config implements ModMenuApi {
 
     @SerialEntry
     public int maxChatHistory = 100;
-
     @SerialEntry
     public boolean announceAdvancements = true;
-
+    @SerialEntry
+    public boolean advancementToasts = true;
+    @SerialEntry
+    public boolean recipeToasts = false;
     @SerialEntry
     public AdminChat adminChat = AdminChat.ENABLED;
-
     @SerialEntry
     public CompactChat compactChat = CompactChat.ONLY_CONSECUTIVE;
+    @SerialEntry
+    public boolean disableFade = false;
 
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
@@ -58,6 +61,18 @@ public class Config implements ModMenuApi {
                                 .binding(true, () -> announceAdvancements, val -> announceAdvancements = val)
                                 .controller(BooleanControllerBuilder::create)
                                 .build())
+                        .option(Option.<Boolean>createBuilder()
+                                .name(Text.translatable("stfu.options.advancementToasts"))
+                                .description(OptionDescription.of(Text.translatable("stfu.options.advancementToasts.description")))
+                                .binding(true, () -> advancementToasts, val -> advancementToasts = val)
+                                .controller(BooleanControllerBuilder::create)
+                                .build())
+                        .option(Option.<Boolean>createBuilder()
+                                .name(Text.translatable("stfu.options.recipeToasts"))
+                                .description(OptionDescription.of(Text.translatable("stfu.options.recipeToasts.description")))
+                                .binding(false, () -> recipeToasts, val -> recipeToasts = val)
+                                .controller(BooleanControllerBuilder::create)
+                                .build())
                         .option(Option.<AdminChat>createBuilder()
                                 .name(Text.translatable("stfu.options.adminChat"))
                                 .description(OptionDescription.of(Text.translatable("stfu.options.adminChat.description")))
@@ -69,6 +84,12 @@ public class Config implements ModMenuApi {
                                 .description(OptionDescription.of(Text.translatable("stfu.options.compactChat.description")))
                                 .binding(CompactChat.ONLY_CONSECUTIVE, () -> compactChat, val -> compactChat = val)
                                 .controller(o -> EnumControllerBuilder.create(o).enumClass(CompactChat.class))
+                                .build())
+                        .option(Option.<Boolean>createBuilder()
+                                .name(Text.translatable("stfu.options.disableFade"))
+                                .description(OptionDescription.of(Text.translatable("stfu.options.disableFade.description")))
+                                .binding(false, () -> disableFade, val -> disableFade = val)
+                                .controller(BooleanControllerBuilder::create)
                                 .build())
                         .build())
                 .build()
