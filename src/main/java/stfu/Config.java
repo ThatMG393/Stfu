@@ -36,6 +36,8 @@ public class Config implements ModMenuApi {
     @SerialEntry
     public CompactChat compactChat = CompactChat.ONLY_CONSECUTIVE;
     @SerialEntry
+    public boolean disableWidgetFade = true;
+    @SerialEntry
     public boolean disableFade = false;
 
     @Override
@@ -84,6 +86,12 @@ public class Config implements ModMenuApi {
                                 .description(OptionDescription.of(Text.translatable("stfu.options.compactChat.description")))
                                 .binding(CompactChat.ONLY_CONSECUTIVE, () -> compactChat, val -> compactChat = val)
                                 .controller(o -> EnumControllerBuilder.create(o).enumClass(CompactChat.class))
+                                .build())
+                        .option(Option.<Boolean>createBuilder()
+                                .name(Text.translatable("stfu.options.disableFade.widget"))
+                                .description(OptionDescription.of(Text.translatable("stfu.options.disableFade.widget.description")))
+                                .binding(true, () -> disableWidgetFade, val -> disableWidgetFade = val)
+                                .controller(BooleanControllerBuilder::create)
                                 .build())
                         .option(Option.<Boolean>createBuilder()
                                 .name(Text.translatable("stfu.options.disableFade"))

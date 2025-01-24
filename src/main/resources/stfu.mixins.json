@@ -14,9 +14,11 @@
     "ShutCommandLimit",
     "ShutInsecureIndicators",
     "ShutInsecureIndicators$Visible",
+    "ShutLoadFade",
     "ShutReusedModifierKeys",
     "ShutTelemetry",
     "ShutToasts",
+    "ShutWidgetLoadFade",
     "ShutWorldAdvice",
     "TextFieldWidgetFix",
     "TooltipFix"
