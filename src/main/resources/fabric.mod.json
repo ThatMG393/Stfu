@@ -12,6 +12,14 @@
     "website": "https://modrinth.com/project/shuttfup",
     "repo": "https://github.com/ItsFelix5/stfu"
   },
+  "entrypoints": {
+    "main": [
+      "stfu.Main"
+    ],
+    "modmenu": [
+      "stfu.Config"
+    ]
+  },
   "license": "MIT",
   "environment": "client",
   "accessWidener": "stfu.accesswidener",
@@ -20,6 +28,8 @@
   ],
   "depends": {
     "fabricloader": "*",
-    "minecraft": "*"
+    "minecraft": "*",
+    "yet_another_config_lib_v3": ">=3.6.2",
+    "modmenu": ">=13.0.0"
   }
 }

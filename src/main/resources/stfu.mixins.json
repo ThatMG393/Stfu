@@ -9,9 +9,7 @@
   "client": [
     "BetterDefaultSettings",
     "BetterHud",
-    "ChatOptions",
     "KeyBindingMixin",
-    "OptionSaver",
     "ShutChat",
     "ShutCommandLimit",
     "ShutInsecureIndicators",

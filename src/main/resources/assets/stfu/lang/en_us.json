@@ -1,12 +1,18 @@
 {
-  "options.maxChatHistory": "Max chat history",
-  "options.announceAdvancements": "Announce advancements",
-  "options.adminChat": "Admin chat",
-  "options.adminChat.enabled": "Enabled",
-  "options.adminChat.only_players": "Only players",
-  "options.adminChat.disabled": "Disabled",
-  "options.compactChat": "Compact chat",
-  "options.compactChat.all": "Always",
-  "options.compactChat.only_consecutive": "Only consecutive",
-  "options.compactChat.never": "Never"
+  "stfu.options.title": "STFU",
+  "stfu.options.options": "Options",
+  "stfu.options.maxChatHistory": "Max Chat History",
+  "stfu.options.maxChatHistory.description": "The maximum number of messages to keep in chat history.",
+  "stfu.options.announceAdvancements": "Announce Advancements",
+  "stfu.options.announceAdvancements.description": "If minecraft shows advancements achieved in chat.",
+  "stfu.options.adminChat": "Admin Chat",
+  "stfu.options.adminChat.description": "Whether you receive a message when an admin or command block runs a command.",
+  "stfu.options.adminChat.enabled": "Enabled",
+  "stfu.options.adminChat.only_players": "Only Players",
+  "stfu.options.adminChat.disabled": "Disabled",
+  "stfu.options.compactChat": "Compact Chat",
+  "stfu.options.compactChat.description": "When you receive multiple equal chat messages, compact them into one.",
+  "stfu.options.compactChat.all": "Always",
+  "stfu.options.compactChat.only_consecutive": "Only Consecutive",
+  "stfu.options.compactChat.never": "Never"
 }
