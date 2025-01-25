@@ -13,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import stfu.Config;
 import stfu.EmptyScreen;
 
 @Mixin(MinecraftClient.class)
@@ -23,10 +24,12 @@ public abstract class MinecraftClientMixin {
 
     @ModifyVariable(at = @At("HEAD"), method = "setScreen", ordinal = 0, argsOnly = true)
     public Screen setScreen(Screen screen) {
-        if (screen instanceof ReconfiguringScreen) screen = new EmptyScreen.Configuration(getNetworkHandler().getConnection());
-        else if (screen instanceof DownloadingTerrainScreen) {
-            if (this.currentScreen instanceof EmptyScreen) screen = null;
-            else screen = new EmptyScreen();
+        if(Config.HANDLER.instance().disableLoadingTerrain) {
+            if (screen instanceof ReconfiguringScreen) screen = new EmptyScreen.Configuration(getNetworkHandler().getConnection());
+            else if (screen instanceof DownloadingTerrainScreen) {
+                if (this.currentScreen instanceof EmptyScreen) screen = null;
+                else screen = new EmptyScreen();
+            }
         }
         return screen;
     }

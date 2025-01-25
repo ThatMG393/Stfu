@@ -1,23 +1,25 @@
 package stfu.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.tooltip.OrderedTextTooltipComponent;
-import net.minecraft.client.gui.tooltip.TooltipBackgroundRenderer;
 import net.minecraft.client.gui.tooltip.TooltipComponent;
 import net.minecraft.client.gui.tooltip.TooltipPositioner;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import org.spongepowered.asm.mixin.Final;
+import org.jetbrains.annotations.Nullable;
+import org.joml.Vector2i;
+import org.joml.Vector2ic;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.ArrayList;
@@ -25,117 +27,38 @@ import java.util.List;
 
 @Mixin(DrawContext.class)
 public abstract class DrawContextMixin {
-    @Unique
-    private static final boolean disabled = FabricLoader.getInstance().isModLoaded("legacy") || FabricLoader.getInstance().isModLoaded("legendarytooltips");// #6 & #11
-    @Shadow
-    @Final
-    private MatrixStack matrices;
-    @Shadow
-    @Final
-    private VertexConsumerProvider.Immediate vertexConsumers;
+    @Unique private static final boolean disabled = FabricLoader.getInstance().isModLoaded("legacy") || FabricLoader.getInstance().isModLoaded("legendarytooltips");// #6 & #11
+    @Shadow public abstract int getScaledWindowWidth();
 
-    @Shadow
-    public abstract int getScaledWindowWidth();
+    @ModifyVariable(method = "drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;Lnet/minecraft/util/Identifier;)V",
+            at = @At("HEAD"), index = 2, argsOnly = true)
+    private List<TooltipComponent> makeComponentsMutable(List<TooltipComponent> components) {
+        return new ArrayList<>(components);
+    }
 
-    @Shadow
-    public abstract void draw();
-
-    @Shadow
-    public abstract int getScaledWindowHeight();
-
-    @Inject(method = "drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;Lnet/minecraft/util/Identifier;)V", at = @At(value = "HEAD"), cancellable = true)
-    public void drawTooltip(TextRenderer textRenderer, List<TooltipComponent> components, int x, int y, TooltipPositioner positioner, Identifier texture, CallbackInfo ci) {
-        if (disabled) return;
-        ci.cancel();
-        if (components.isEmpty()) return;
-        DrawContext self = (DrawContext) (Object) this;
-        components = new ArrayList<>(components);
-
-        int forcedWidth = 0;
-        for (TooltipComponent component : components) {
-            if (!(component instanceof OrderedTextTooltipComponent)) {
-                int width2 = component.getWidth(textRenderer);
-                if (width2 > forcedWidth)
-                    forcedWidth = width2;
-            }
-        }
-
-        int renderX = x + 12;
-        int maxWidth = getScaledWindowWidth() - 20 - x;
-        if (forcedWidth > maxWidth || maxWidth < 100) {
-            maxWidth = x - 28;
-
-            int maxX = 0;
-            for (TooltipComponent component : components) {
-                int newWidth = component.getWidth(textRenderer);
-                if (newWidth > maxX) maxX = newWidth;
-            }
-            renderX -= 28 + maxX;
-        }
-
+    @Inject(method = "drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;Lnet/minecraft/util/Identifier;)V",
+            at = @At("HEAD"))
+    private void wrapComponents(TextRenderer textRenderer, List<TooltipComponent> components, int x, int y, TooltipPositioner positioner, @Nullable Identifier texture, CallbackInfo ci) {
+        if (disabled || components.isEmpty()) return;
+        int maxWidth = getScaledWindowWidth() - 7;
         for (int i = 0; i < components.size(); i++) {
-            if (!(components.get(i) instanceof OrderedTextTooltipComponent orderedTextTooltipComponent)) continue;
+            if(!(components.get(i) instanceof OrderedTextTooltipComponent component)) continue;
             MutableText text = Text.empty();
-
-            orderedTextTooltipComponent.text.accept((index, style, codePoint) -> {
+            component.text.accept((index, style, codePoint) -> {
                 text.append(Text.literal(new String(Character.toChars(codePoint))).setStyle(style));
                 return true;
             });
-
-            List<Text> children = text.getSiblings();
-            for (int j = 0; j < children.size() - 1; j++) {
-                String code = children.get(j).getString() + children.get(j + 1).getString();
-                if (code.equals("\\n")) {
-                    MutableText t1 = Text.literal("");
-                    for (int k = 0; k < j; k++) t1.append(children.get(i));
-                    MutableText t2 = Text.literal("");
-                    for (int k = j + 2; k < children.size(); k++) t1.append(children.get(i));
-                    components.set(i, TooltipComponent.of(t1.asOrderedText()));
-                    components.add(i + 1, TooltipComponent.of(t2.asOrderedText()));
-                    break;
-                }
-            }
+            components.remove(i);
+            components.addAll(i, textRenderer.wrapLines(text, maxWidth).stream().map(TooltipComponent::of).toList());
         }
-        for (int i = 0; i < components.size(); i++) {
-            if (components.get(i) instanceof OrderedTextTooltipComponent orderedTextTooltipComponent) {
-                MutableText text = Text.empty();
+    }
 
-                orderedTextTooltipComponent.text.accept((index, style, codePoint) -> {
-                    text.append(Text.literal(new String(Character.toChars(codePoint))).setStyle(style));
-                    return true;
-                });
-                if (text.getSiblings().isEmpty()) continue;
-
-                components.remove(i);
-                components.addAll(i, textRenderer.wrapLines(text, maxWidth).stream().map(TooltipComponent::of).toList());
-            }
-        }
-
-        int i = 0;
-        int j = components.size() == 1 ? -2 : 0;
-
-        for (TooltipComponent component : components) {
-            int k = component.getWidth(textRenderer);
-            if (k > i) i = k;
-
-            j += component.getHeight(textRenderer);
-        }
-
-        int renderY = y - 12;
-        if (renderY + j + 3 > getScaledWindowHeight()) renderY = getScaledWindowHeight() - j - 3;
-        this.matrices.push();
-        this.draw();
-        TooltipBackgroundRenderer.render(self, renderX, renderY, i, j, 400, texture);
-        this.draw();
-        this.matrices.translate(0.0F, 0.0F, 400.0F);
-
-        for (int r = 0; r < components.size(); ++r) {
-            TooltipComponent tooltipComponent2 = components.get(r);
-            tooltipComponent2.drawText(textRenderer, renderX, renderY, this.matrices.peek().getPositionMatrix(), this.vertexConsumers);
-            tooltipComponent2.drawItems(textRenderer, renderX, renderY, i, j, self);
-            renderY += tooltipComponent2.getHeight(textRenderer) + (r == 0 ? 2 : 0);
-        }
-
-        this.matrices.pop();
+    @WrapOperation(method = "drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;Lnet/minecraft/util/Identifier;)V",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/tooltip/TooltipPositioner;getPosition(IIIIII)Lorg/joml/Vector2ic;"))
+    private Vector2ic reposition(TooltipPositioner instance, int screenWidth, int screenHeight, int x, int y, int width, int height, Operation<Vector2ic> original) {
+        Vector2ic vector2ic = original.call(instance, screenWidth, screenHeight, x, y, width, height);
+        x = Math.max(6, Math.min(vector2ic.x(), screenWidth - width - 6));
+        y = Math.max(6, Math.min(vector2ic.y(), screenHeight - height - 6));
+        return new Vector2i(x, y);
     }
 }

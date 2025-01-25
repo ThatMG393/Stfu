@@ -64,6 +64,11 @@ public class Config implements ModMenuApi {
     @SerialEntry
     public boolean disableFade = false;
 
+    @AutoGen(category = category)
+    @dev.isxander.yacl3.config.v2.api.autogen.Boolean
+    @SerialEntry
+    public boolean disableLoadingTerrain = true;
+
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
         return s->HANDLER.generateGui().generateScreen(s);
