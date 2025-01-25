@@ -10,6 +10,7 @@
     "BetterDefaultSettings",
     "BetterHud",
     "KeyBindingMixin",
+    "MinecraftClientMixin",
     "ShutChat",
     "ShutCommandLimit",
     "ShutInsecureIndicators",

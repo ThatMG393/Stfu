@@ -26,7 +26,6 @@ abstract class ShutToasts {
         return Config.HANDLER.instance().recipeToasts && instance.shouldShowNotification();
     }
 
-
     @Inject(method = "onAdvancements", at = @At("HEAD"), cancellable = true)
     private void disableAdvancementToasts(AdvancementUpdateS2CPacket packet, CallbackInfo ci) {
         if(!Config.HANDLER.instance().advancementToasts) ci.cancel();
