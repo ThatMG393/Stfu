@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import stfu.Config;
 
 @Mixin(TitleScreen.class)
-public class ShutWidgetLoadFade {
+public class TitleScreenMixin {
     @ModifyVariable(method = "<init>(ZLnet/minecraft/client/gui/LogoDrawer;)V", argsOnly = true, ordinal = 0, at = @At("HEAD"))
     private static boolean shutLoadFade(boolean bl) {
         return !Config.HANDLER.instance().disableWidgetFade && bl;

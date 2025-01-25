@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import stfu.Config;
 
 @Mixin(ClientPlayNetworkHandler.class)
-abstract class ShutToasts {
+abstract class PlayNetworkHandlerMixin {
     @Redirect(method = "onGameJoin", at = @At(value = "FIELD", target = "Lnet/minecraft/client/network/ClientPlayNetworkHandler;displayedUnsecureChatWarning:Z", opcode = Opcodes.GETFIELD))
     private boolean youAlreadyShowedItTrustMe(ClientPlayNetworkHandler instance) {
         return true;

@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import stfu.Config;
 
 @Mixin(SplashOverlay.class)
-public class ShutLoadFade {
+public class SplashMixin {
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/resource/ResourceReload;throwException()V"))
     private void removeOverlay(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         if(Config.HANDLER.instance().disableFade) MinecraftClient.getInstance().setOverlay(null);

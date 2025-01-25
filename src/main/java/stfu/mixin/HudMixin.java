@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(InGameHud.class)
-public abstract class BetterHud {
+public abstract class HudMixin {
     @Shadow
     @Final
     private MinecraftClient client;

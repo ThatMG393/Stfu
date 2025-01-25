@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(ControlsListWidget.KeyBindingEntry.class)
-public class ShutReusedModifierKeys {
+public class KeyBindingWidgetMixin {
     @Redirect(method = "update", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/option/KeyBinding;isUnbound()Z"))
     private boolean shutReusedModifierKeys(KeyBinding instance) {
         return instance.isUnbound() || instance.getCategory().equals(KeyBinding.CREATIVE_CATEGORY);

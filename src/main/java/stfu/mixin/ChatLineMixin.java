@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ChatHudLine.class)
-public class ShutInsecureIndicators {
+public class ChatLineMixin {
     @Inject(method = "indicator", at = @At("HEAD"), cancellable = true)
     private void shutIndicator(CallbackInfoReturnable<MessageIndicator> cir) {
         cir.setReturnValue(null);

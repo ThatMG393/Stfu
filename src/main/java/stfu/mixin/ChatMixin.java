@@ -21,7 +21,7 @@ import stfu.Config;
 import java.util.List;
 
 @Mixin(ChatHud.class)
-public abstract class ShutChat {
+public abstract class ChatMixin {
     @Unique
     private static final Style OCCURRENCES = Style.EMPTY.withColor(Formatting.GRAY);
     @Shadow

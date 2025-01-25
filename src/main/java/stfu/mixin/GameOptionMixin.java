@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(GameOptions.class)
-abstract class BetterDefaultSettings {
+abstract class GameOptionMixin {
     @Shadow
     @Final
     private SimpleOption<Boolean> operatorItemsTab;
