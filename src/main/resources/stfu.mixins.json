@@ -8,6 +8,7 @@
   },
   "client": [
     "AccessibilityOptionsMixin",
+    "BiomeMixin",
     "ChatLineMixin",
     "ChatLineMixin$Visible",
     "ChatMixin",

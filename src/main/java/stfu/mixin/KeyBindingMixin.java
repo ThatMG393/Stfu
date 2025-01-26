@@ -3,14 +3,9 @@ package stfu.mixin;
 import com.google.common.collect.Maps;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -24,21 +19,30 @@ public class KeyBindingMixin {
     @Unique
     private static final Map<InputUtil.Key, Set<KeyBinding>> KEY_TO_BINDINGS = Maps.newHashMap();
 
-    @Inject(method = "onKeyPressed", at = @At("HEAD"), cancellable = true)
-    private static void onKeyPressed(InputUtil.Key key, CallbackInfo ci) {
-        ci.cancel();
+    /**
+     * @author ItsFelix5
+     * @reason Stfu allows multiple keybindings to be bound to the same key
+     */
+    @Overwrite
+    public static void onKeyPressed(InputUtil.Key key) {
         KEY_TO_BINDINGS.getOrDefault(key, Set.of()).forEach(keyBinding -> keyBinding.timesPressed++);
     }
 
-    @Inject(method = "setKeyPressed", at = @At("HEAD"), cancellable = true)
-    private static void setKeyPressed(InputUtil.Key key, boolean pressed, CallbackInfo ci) {
-        ci.cancel();
+    /**
+     * @author ItsFelix5
+     * @reason Stfu allows multiple keybindings to be bound to the same key
+     */
+    @Overwrite
+    private static void setKeyPressed(InputUtil.Key key, boolean pressed) {
         KEY_TO_BINDINGS.getOrDefault(key, Set.of()).forEach(keyBinding -> keyBinding.setPressed(pressed));
     }
 
-    @Inject(method = "updateKeysByCode", at = @At("HEAD"), cancellable = true)
-    private static void updateKeysByCode(CallbackInfo ci) {
-        ci.cancel();
+    /**
+     * @author ItsFelix5
+     * @reason Stfu allows multiple keybindings to be bound to the same key
+     */
+    @Overwrite
+    private static void updateKeysByCode() {
         KEY_TO_BINDINGS.clear();
         for (KeyBinding keyBinding : KEYS_BY_ID.values()) KEY_TO_BINDINGS.computeIfAbsent(keyBinding.boundKey, k -> new HashSet<>()).add(keyBinding);
     }
