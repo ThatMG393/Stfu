@@ -1,30 +1,32 @@
 # Stfu
-### A mod to fix some minor annoyances!
+### A mod to fix some annoyances!
+<span>
+<a href="https://modrinth.com/mod/fabric-api"><img alt="Requires fabric api" src="https://raw.githubusercontent.com/ItsFelix5/CameraTweaks/refs/heads/master/.github/badges/requires_fabricapi.svg"></a>
+<a href="https://modrinth.com/mod/modmenu"><img alt="Requires mod menu" src="https://raw.githubusercontent.com/ItsFelix5/CameraTweaks/refs/heads/master/.github/badges/requires_modmenu.svg"></a>
+<a href="https://modrinth.com/mod/yacl"><img alt="Requires YACL" src="https://raw.githubusercontent.com/ItsFelix5/CameraTweaks/refs/heads/master/.github/badges/requires_YACL.svg"></a>
+</span>
 
 #### Current changes:
-* Removed custom world "advice"
-* Disabled the narrator on first boot
-* Disabled the narrator shortcut and realms notifications by default
-* Removed the social interactions and recipes toasts
-* Removed multiplayer warning
-* Removed telemetry
+* Removed custom world "advice", the tutorial, the multiplayer warning, chat signing warnings and telemetry
+* Disabled realms notifications and the narrator by default and allowed rebinding the narrator key
+* Allowed toggling all kinds of toasts
 * Enabled the operator item tab by default
-* Removed the tutorial
-* Disabled the chat command length limit
-* Added options to hide advancement broadcasts and command block output
+* Removed the chat command length limit
+* Added options to hide advancement broadcasts and command block output and compact chat spam
 * Added an option to increase the maximum amount of chat messages
-* Removed the unsigned message indicators
 * Fixed tooltips running off the screen
-* Added an option to compact repetitive chat messages
-* Made it possible to see your health and hunger when riding something
-* Made it possible to bind a button to multiple keybinds
+* Added options that speed up minecraft/world (re)loading
+* Made it possible to see your health and hunger when riding something and to bind a button to multiple keybinds
+* Also very slightly reduced RAM
 
 ### Faq
 #### I have a suggestion for this mod!
-If you have any suggestions, feel free to [tell me](https://github.com/ItsFelix5/Stfu/issues/new?&labels=Feature&template=feature_request.md&title=%5BSUGGESTION%5D+)!
+If you have any suggestions, feel free to [tell me](https://github.com/ItsFelix5/Stfu/issues/new?assignees=itsfelix5&labels=Feature&template=feature_request.yml&title=%5BSUGGESTION%5D+)!
+### I found a bug!
+If you found a bug, please [report it](https://github.com/ItsFelix5/Stfu/issues/new?assignees=itsfelix5&labels=bug&template=bug_report.yml&title=%5BIBUG%5D+) so I can fix it asap!
 #### Is this mod compatible with X?
 Probably, I am trying to make this mod as compatible as I can. If there is a problematic conflict you can 
-[open an issue](https://github.com/ItsFelix5/Stfu/issues/new?labels=Incompatibility&template=bug_report.md&title=%5BINCOMPATIBILITY%5D+).
+[open an issue](https://github.com/ItsFelix5/Stfu/issues/new?assignees=itsfelix5&labels=Incompatibility&template=incompatibility.yml&title=%5BINCOMPATIBILITY%5D+).
 #### Can I use this in my modpack?
 Yes, of course as long as it stays on modrinth or curseforge!
 #### Can I redistribute this mod?

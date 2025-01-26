@@ -33,7 +33,7 @@ public class KeyBindingMixin {
      * @reason Stfu allows multiple keybindings to be bound to the same key
      */
     @Overwrite
-    private static void setKeyPressed(InputUtil.Key key, boolean pressed) {
+    public static void setKeyPressed(InputUtil.Key key, boolean pressed) {
         KEY_TO_BINDINGS.getOrDefault(key, Set.of()).forEach(keyBinding -> keyBinding.setPressed(pressed));
     }
 
@@ -42,7 +42,7 @@ public class KeyBindingMixin {
      * @reason Stfu allows multiple keybindings to be bound to the same key
      */
     @Overwrite
-    private static void updateKeysByCode() {
+    public static void updateKeysByCode() {
         KEY_TO_BINDINGS.clear();
         for (KeyBinding keyBinding : KEYS_BY_ID.values()) KEY_TO_BINDINGS.computeIfAbsent(keyBinding.boundKey, k -> new HashSet<>()).add(keyBinding);
     }

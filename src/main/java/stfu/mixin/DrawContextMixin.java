@@ -57,6 +57,7 @@ public abstract class DrawContextMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/tooltip/TooltipPositioner;getPosition(IIIIII)Lorg/joml/Vector2ic;"))
     private Vector2ic reposition(TooltipPositioner instance, int screenWidth, int screenHeight, int mouseX, int mouseY, int width, int height, Operation<Vector2ic> original) {
         Vector2ic vector2ic = original.call(instance, screenWidth, screenHeight, mouseX, mouseY, width, height);
+        if(disabled) return vector2ic;
         int x = Math.max(6, Math.min(vector2ic.x(), screenWidth - width - 6));
         int y = Math.max(6, Math.min(vector2ic.y(), screenHeight - height - 6));
         if (x == 6 && y != 6) {
