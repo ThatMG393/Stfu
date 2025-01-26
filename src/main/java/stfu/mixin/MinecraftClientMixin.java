@@ -10,15 +10,12 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import stfu.Config;
 import stfu.EmptyScreen;
 
 @Mixin(MinecraftClient.class)
 public abstract class MinecraftClientMixin {
-    @Shadow @Nullable public Screen currentScreen;
     @Shadow @Nullable public ClientWorld world;
     @Shadow public abstract ClientPlayNetworkHandler getNetworkHandler();
 
@@ -27,15 +24,10 @@ public abstract class MinecraftClientMixin {
         if(Config.HANDLER.instance().disableLoadingTerrain) {
             if (screen instanceof ReconfiguringScreen) screen = new EmptyScreen.Configuration(getNetworkHandler().getConnection());
             else if (screen instanceof DownloadingTerrainScreen) {
-                if (this.currentScreen instanceof EmptyScreen) screen = null;
-                else screen = new EmptyScreen();
+                if(world == null) screen = new EmptyScreen();
+                else screen = null;
             }
         }
         return screen;
-    }
-
-    @Inject(method = "setScreen", at = @At("HEAD"), cancellable = true)
-    public void setScreenCancelCloseScreen(Screen screen, CallbackInfo ci) {
-        if (this.world != null && screen instanceof EmptyScreen) ci.cancel();
     }
 }
