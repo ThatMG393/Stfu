@@ -15,6 +15,7 @@
     "ChatScreenMixin",
     "DrawContextMixin",
     "GameOptionMixin",
+    "GeneratedItemModelMixin",
     "HudMixin",
     "IntegratedServerLoaderMixin",
     "KeyBindingMixin",
@@ -23,8 +24,10 @@
     "MinecraftClientMixin",
     "PlayNetworkHandlerMixin",
     "SplashMixin",
+    "SpriteMixin",
     "TelemetryMixin",
     "TextFieldWidgetMixin",
+    "ThreadExecutorMixin",
     "TitleScreenMixin"
   ]
 }

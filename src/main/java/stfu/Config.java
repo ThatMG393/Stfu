@@ -10,6 +10,7 @@ import dev.isxander.yacl3.config.v2.api.autogen.EnumCycler;
 import dev.isxander.yacl3.config.v2.api.autogen.IntSlider;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
@@ -23,13 +24,15 @@ public class Config implements ModMenuApi {
             .build();
 
     private static final String category = "options";
+    private static final String chat = "chat";
+    private static final String loading = "loading";
 
-    @AutoGen(category = category)
+    @AutoGen(category = category, group = chat)
     @IntSlider(min = 10, max = 5000, step = 10)
     @SerialEntry
     public int maxChatHistory = 100;
 
-    @AutoGen(category = category)
+    @AutoGen(category = category, group = chat)
     @dev.isxander.yacl3.config.v2.api.autogen.Boolean
     @SerialEntry
     public boolean announceAdvancements = true;
@@ -44,30 +47,35 @@ public class Config implements ModMenuApi {
     @SerialEntry
     public boolean recipeToasts = false;
 
-    @AutoGen(category = category)
+    @AutoGen(category = category, group = chat)
     @EnumCycler
     @SerialEntry
     public AdminChat adminChat = AdminChat.ENABLED;
 
-    @AutoGen(category = category)
+    @AutoGen(category = category, group = chat)
     @EnumCycler
     @SerialEntry
     public CompactChat compactChat = CompactChat.ONLY_CONSECUTIVE;
 
-    @AutoGen(category = category)
+    @AutoGen(category = category, group = loading)
     @dev.isxander.yacl3.config.v2.api.autogen.Boolean
     @SerialEntry
     public boolean disableWidgetFade = true;
 
-    @AutoGen(category = category)
+    @AutoGen(category = category, group = loading)
     @dev.isxander.yacl3.config.v2.api.autogen.Boolean
     @SerialEntry
     public boolean disableFade = false;
 
-    @AutoGen(category = category)
+    @AutoGen(category = category, group = loading)
     @dev.isxander.yacl3.config.v2.api.autogen.Boolean
     @SerialEntry
     public boolean disableLoadingTerrain = true;
+
+    @AutoGen(category = category)
+    @dev.isxander.yacl3.config.v2.api.autogen.Boolean
+    @SerialEntry
+    public boolean fixModelGaps = !MinecraftClient.IS_SYSTEM_MAC;
 
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {

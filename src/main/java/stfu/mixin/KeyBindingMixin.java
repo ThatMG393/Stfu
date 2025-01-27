@@ -21,7 +21,7 @@ public class KeyBindingMixin {
 
     /**
      * @author ItsFelix5
-     * @reason Stfu allows multiple keybindings to be bound to the same key
+     * @reason To allow multiple keybindings to be bound to the same key
      */
     @Overwrite
     public static void onKeyPressed(InputUtil.Key key) {
@@ -30,7 +30,7 @@ public class KeyBindingMixin {
 
     /**
      * @author ItsFelix5
-     * @reason Stfu allows multiple keybindings to be bound to the same key
+     * @reason To allow multiple keybindings to be bound to the same key
      */
     @Overwrite
     public static void setKeyPressed(InputUtil.Key key, boolean pressed) {
@@ -38,8 +38,8 @@ public class KeyBindingMixin {
     }
 
     /**
-     * @author ItsFelix5
-     * @reason Stfu allows multiple keybindings to be bound to the same key
+     * @author Stfu
+     * @reason To allow multiple keybindings to be bound to the same key
      */
     @Overwrite
     public static void updateKeysByCode() {

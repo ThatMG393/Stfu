@@ -13,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(IntegratedServerLoader.class)
 abstract class IntegratedServerLoaderMixin {
     /**
-     * @author ItsFelix5
-     * @reason Stfu bypasses the warning screen
+     * @author Stfu
+     * @reason To bypass the warning screen
      */
     @Overwrite
     public static void tryLoad(MinecraftClient client, CreateWorldScreen parent, Lifecycle lifecycle, Runnable loader, boolean bypassWarnings) {
