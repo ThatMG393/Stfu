@@ -14,10 +14,10 @@
 * Removed the chat command length limit
 * Added options to hide advancement broadcasts and command block output and compact chat spam
 * Added an option to increase the maximum amount of chat messages
-* Fixed tooltips running off the screen
+* Fixed tooltips running off the screen and model gaps
 * Added options that speed up minecraft/world (re)loading
 * Made it possible to see your health and hunger when riding something and to bind a button to multiple keybinds
-* Also very slightly reduced RAM
+* Improved performance
 
 ### Faq
 #### I have a suggestion for this mod!
@@ -27,6 +27,7 @@ If you found a bug, please [report it](https://github.com/ItsFelix5/Stfu/issues/
 #### Is this mod compatible with X?
 Probably, I am trying to make this mod as compatible as I can. If there is a problematic conflict you can 
 [open an issue](https://github.com/ItsFelix5/Stfu/issues/new?assignees=itsfelix5&labels=Incompatibility&template=incompatibility.yml&title=%5BINCOMPATIBILITY%5D+).
+DO NOT OPEN AN ISSUE WHEN FABRIC SAYS IT IS INCOMPATIBLE, this means this mod fully includes all those features.
 #### Can I use this in my modpack?
 Yes, of course as long as it stays on modrinth or curseforge!
 #### Can I redistribute this mod?

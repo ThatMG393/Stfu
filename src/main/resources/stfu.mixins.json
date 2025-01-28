@@ -22,12 +22,14 @@
     "KeyBindingWidgetMixin",
     "KeyboardMixin",
     "MinecraftClientMixin",
+    "MinecraftServerMixin",
     "PlayNetworkHandlerMixin",
     "SplashMixin",
     "SpriteMixin",
     "TelemetryMixin",
     "TextFieldWidgetMixin",
     "ThreadExecutorMixin",
-    "TitleScreenMixin"
+    "TitleScreenMixin",
+    "UtilMixin"
   ]
 }

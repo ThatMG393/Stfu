@@ -1,7 +1,5 @@
 package stfu;
 
-import com.terraformersmc.modmenu.api.ConfigScreenFactory;
-import com.terraformersmc.modmenu.api.ModMenuApi;
 import dev.isxander.yacl3.api.NameableEnum;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
@@ -14,7 +12,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-public class Config implements ModMenuApi {
+public class Config  {
     public static ConfigClassHandler<Config> HANDLER = ConfigClassHandler.createBuilder(Config.class)
             .id(Identifier.of("stfu", "config"))
             .serializer(config -> GsonConfigSerializerBuilder.create(config)
@@ -76,11 +74,6 @@ public class Config implements ModMenuApi {
     @dev.isxander.yacl3.config.v2.api.autogen.Boolean
     @SerialEntry
     public boolean fixModelGaps = !MinecraftClient.IS_SYSTEM_MAC;
-
-    @Override
-    public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return s->HANDLER.generateGui().generateScreen(s);
-    }
 
     public enum AdminChat implements NameableEnum {
         ENABLED,

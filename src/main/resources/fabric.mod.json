@@ -12,7 +12,7 @@
   },
   "entrypoints": {
     "main": ["stfu.Main"],
-    "modmenu": ["stfu.Config"]
+    "modmenu": ["stfu.ModMenu"]
   },
   "license": "MIT",
   "environment": "client",
@@ -22,7 +22,17 @@
     "fabricloader": "*",
     "minecraft": "*",
     "fabric": "*",
-    "yet_another_config_lib_v3": ">=3.6.2",
+    "yet_another_config_lib_v3": ">=3.6.2"
+  },
+  "recommends": {
     "modmenu": ">=13.0.0"
+  },
+  "breaks" : {
+    "memoryleakfix": "*",
+    "modelfix": "*",
+    "morechathistory": "*",
+    "better-mount-hud": "*",
+    "fadeless": "*",
+    "threadtweak": "*"
   }
 }
