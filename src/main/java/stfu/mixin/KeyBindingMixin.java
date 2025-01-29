@@ -3,7 +3,9 @@ package stfu.mixin;
 import com.google.common.collect.Maps;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
-import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
@@ -13,9 +15,6 @@ import java.util.Set;
 
 @Mixin(KeyBinding.class)
 public class KeyBindingMixin {
-    @Shadow
-    @Final
-    private static Map<String, KeyBinding> KEYS_BY_ID;
     @Unique
     private static final Map<InputUtil.Key, Set<KeyBinding>> KEY_TO_BINDINGS = Maps.newHashMap();
 
@@ -37,14 +36,15 @@ public class KeyBindingMixin {
         KEY_TO_BINDINGS.getOrDefault(key, Set.of()).forEach(keyBinding -> keyBinding.setPressed(pressed));
     }
 
-    /**
-     * @author Stfu
-     * @reason To allow multiple keybindings to be bound to the same key
-     */
-    @Overwrite
-    public static void updateKeysByCode() {
+    @Redirect(method = "updateKeysByCode", at = @At(value = "INVOKE", target = "Ljava/util/Map;clear()V"))
+    private static void clearMap(Map<?, ?> instance) {
         KEY_TO_BINDINGS.clear();
-        for (KeyBinding keyBinding : KEYS_BY_ID.values()) KEY_TO_BINDINGS.computeIfAbsent(keyBinding.boundKey, k -> new HashSet<>()).add(keyBinding);
+    }
+
+    @Redirect(method = "updateKeysByCode", at = @At(value = "INVOKE", target = "Ljava/util/Map;put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;"))
+    private static <K, V> V addBinding(Map<K, V> instance, K k, V v) {
+        KEY_TO_BINDINGS.computeIfAbsent((InputUtil.Key) k, unused -> new HashSet<>()).add((KeyBinding) v);
+        return v;
     }
 
     @Redirect(method = "<init>(Ljava/lang/String;Lnet/minecraft/client/util/InputUtil$Type;ILjava/lang/String;)V", at = @At(value = "INVOKE", target =
