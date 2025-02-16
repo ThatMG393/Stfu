@@ -25,11 +25,12 @@ public abstract class MinecraftClientMixin {
 
     @Inject(method = "<init>", at = @At("RETURN"))
     private void onInit(RunArgs args, CallbackInfo ci) {
-        Thread.currentThread().setPriority(Runtime.getRuntime().availableProcessors() > 4?8:5); // Render Thread
+        Thread.currentThread().setPriority(Config.HANDLER.instance().renderThreadPriority); // Render Thread
     }
 
     @Redirect(method = "render(Z)V", at = @At(value = "INVOKE", target = "java/lang/Thread.yield()V"))
-    private void removeYield(){// This seems to have a positive effect but it probably has a reason of existence
+    private void removeYield() {
+        // This seems to have a positive effect but it probably has a reason of existence
     }
 
     @ModifyVariable(at = @At("HEAD"), method = "setScreen", ordinal = 0, argsOnly = true)
