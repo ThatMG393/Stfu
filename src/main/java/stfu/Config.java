@@ -24,6 +24,7 @@ public class Config  {
     private static final String category = "options";
     private static final String chat = "chat";
     private static final String loading = "loading";
+    private static final String thread = "thread";
 
     @AutoGen(category = category, group = chat)
     @IntSlider(min = 10, max = 5000, step = 10)
@@ -74,6 +75,21 @@ public class Config  {
     @dev.isxander.yacl3.config.v2.api.autogen.Boolean
     @SerialEntry
     public boolean fixModelGaps = !MinecraftClient.IS_SYSTEM_MAC;
+
+    @AutoGen(category = category, group = thread)
+    @IntSlider(min = 1, max = 10, step = 1)
+    @SerialEntry
+    public int renderThreadPriority = (Runtime.getRuntime().availableProcessors() > 4) ? 8 : 5;
+
+    @AutoGen(category = category, group = thread)
+    @IntSlider(min = 1, max = 10, step = 1)
+    @SerialEntry
+    public int serverThreadPriority = (Runtime.getRuntime().availableProcessors() > 4) ? 8 : 5;
+
+    @AutoGen(category = category, group = thread)
+    @IntSlider(min = 1, max = 10, step = 1)
+    @SerialEntry
+    public int ioThreadPriority = 1;
 
     public enum AdminChat implements NameableEnum {
         ENABLED,
